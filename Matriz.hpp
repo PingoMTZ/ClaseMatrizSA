@@ -3,12 +3,9 @@
 
 #include <iostream>
 
-const short MAXDIM = 50;
-
 class Matriz{
 
 public:
-
 
 private:
 
