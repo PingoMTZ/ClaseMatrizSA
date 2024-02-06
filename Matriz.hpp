@@ -54,11 +54,10 @@ public:
 
     Matriz Invertir() const;
 
-    //*MATRIZ ADJUNTA*
+    Matriz Adjunta() const;
 
-    //*DETERMINANTE DE MATRIZ*
+    double Determinante() const;
 
-    //*SUBMATRIZ*
     Matriz SubMatriz(unsigned int ignoraFila, unsigned int ignoraColumna) const;
 
     void Redimensionar(unsigned int filas, unsigned int columnas);

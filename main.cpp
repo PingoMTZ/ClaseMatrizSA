@@ -9,7 +9,7 @@ int main()
 
         std::cout << "Introduzca los n elementos de la primera matriz v" << '\n';
         std::cin >> v;
-        /*
+
         std::cout << "Introduzca los n elementos de la segunda matriz w" << '\n';
         std::cin >> w;
 
@@ -34,29 +34,24 @@ int main()
         std::cout << v << " traspuesta " << " = " << resultante << '\n';
 
         resultante.Redimensionar(5, 5);
-        */
 
-        std::cout << v << '\n';
+        std::cout << "Matriz redimensionada = " << resultante << '\n';
 
         resultante = v.SubMatriz(0, 0);
 
-        std::cout << resultante << "Separacion" << '\n';
+        std::cout << "Sub matriz (0,0) de v  = " << resultante << '\n';
 
-        resultante = v.SubMatriz(1, 2);
+        std::cout << v << '\n';
 
-        std::cout << resultante << "Separacion" << '\n';
+        std::cout << "Determinante de v = " << v.Determinante() << '\n';
 
-        resultante = v.SubMatriz(2, 0);
+        std::cout << v << '\n';
 
-        std::cout << resultante << "Separacion" << '\n';
+        std::cout << "Adjunta de v = " << v.Adjunta() << '\n';
 
-        resultante = v.SubMatriz(3, 3);
+        std::cout << v << '\n';
 
-        std::cout << resultante << "Separacion" << '\n';
-
-        resultante = v.SubMatriz(7, 3);
-
-        std::cout << resultante << "Separacion" << '\n';
+        std::cout << "Inversa de v = " << v.Invertir() << '\n';
 
     }catch(const char *msn){
         std::cerr << "Error: " << msn << '\n';

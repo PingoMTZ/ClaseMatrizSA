@@ -1,3 +1,4 @@
+#include <cmath>
 #include "Matriz.hpp"
 
 //*CONSTRUCTOR*
@@ -125,26 +126,61 @@ Matriz Matriz::Trasponer() const{
 }
 //*INVERSA*
 Matriz Matriz::Invertir() const{
-    if(filas != columnas) throw "Dimensiones inaptas para calcular la inversa de una matriz";
+    if(filas != columnas) throw "Solo se aceptan matrices cuadradas para obtener la matriz inversa";
+    double determinante = (*this).Determinante();
+    if(determinante == 0) throw "El determinante de la matriz es igual a cero por lo que no tiene inversa";
+
+    double reciprocoDeterminante = 1/determinante;
+    Matriz adjunta = (*this).Adjunta();
 
     Matriz inversa(filas, columnas);
 
-    //Proceso de inversa aqui.
+    for(unsigned int i = 0; i < inversa.filas; ++i){
+        for(unsigned int j = 0; j < inversa.columnas; ++j){
+            inversa.arreglo[i][j] = reciprocoDeterminante*adjunta.arreglo[i][j];
+        }
+    }
 
     return inversa;
 }
 //*MATRIZ ADJUNTA*
+Matriz Matriz::Adjunta() const{
+    if(filas != columnas) throw "Solo se aceptan matrices cuadradas para obtener la matriz adjunta";
+    if(filas == 1 && columnas == 1) throw "Las dimensiones de la matriz tienen que ser mayor a 1x1 para obtener su adjunta";
+
+    Matriz resultante(filas, columnas);
+    Matriz subArreglo;
+
+    for(unsigned int i = 0; i < resultante.filas; ++i){
+        for(unsigned int j = 0; j < resultante.columnas; ++j){
+            subArreglo = (*this).SubMatriz(i, j);
+            resultante.arreglo[i][j] = pow(-1,i+j)*subArreglo.Determinante();
+        }
+    }
+
+    resultante = resultante.Trasponer();
+
+    return resultante;
+}
 //*DETERMINANTE DE MATRIZ*
+double Matriz::Determinante() const{
+    if(filas != columnas) throw "Solo se aceptan matrices cuadradas para obtener el determinante";
+    if(filas == 1 && columnas == 1) return arreglo[0][0];
+
+    double determinante = 0;
+    Matriz subArreglo;
+
+    for(unsigned int j = 0; j < columnas; ++j){
+        subArreglo = (*this).SubMatriz(0, j);
+        determinante += arreglo[0][j]*pow(-1, j)*subArreglo.Determinante();
+    }
+
+    return determinante;
+}
 //*SUBMATRIZ*
-// ¿que significa ignora fila e ignora columna? diferenciar entre punto de vista de usuario y punto de vista de desarrollador y su proposito
 Matriz Matriz::SubMatriz(unsigned int ignoraFila, unsigned int ignoraColumna) const{
     // Comprobar si las dimensiones son apropiadas para obtener una submatriz
-    if(ignoraFila < 0 || ignoraFila >= filas || ignoraColumna < 0 || ignoraColumna >= columnas){
-            char mensajeError [12];
-            sprintf(mensajeError, "No funciono");
-            //sprintf (mensajeError, "Error: No se puede obtener la submatriz para la posicion %d , %d para matriz de %d x %d", ignoraFila, ignoraColumna, filas, columnas);
-            throw mensajeError;
-    }
+    if(ignoraFila < 0 || ignoraFila >= filas || ignoraColumna < 0 || ignoraColumna >= columnas) throw "Dimensiones no aptas para obtener una submatriz";
     if(filas != columnas) throw "Solo se aceptan matrices cuadradas para obtener una submatriz";
     if(filas == 1 && columnas == 1) throw "Las dimensiones de la matriz tienen que ser mayor a 1x1 para obtener una submatriz";
 
@@ -188,7 +224,7 @@ void Matriz::Redimensionar(unsigned int filas, unsigned int columnas){
         for(unsigned int i = 1; i < filas; ++i){
             arreglo[i] = arreglo[i-1] + columnas;
         }
-        // To Do List. Convertir este for a un método y asignarle su explicación de propósito.
+
         for(unsigned int i = 0; i < filas; ++i){
             for(unsigned int j = 0; j < columnas; ++j){
                 arreglo[i][j] = 0;
@@ -224,9 +260,7 @@ void Matriz::Redimensionar(unsigned int filas, unsigned int columnas){
      }
 }
 
-//*FUNCIONES AMIGUITAS*
-
-//*PRODUCTO ESCALAR POR MATRIZ*
+//*AMIGA PRODUCTO ESCALAR POR MATRIZ*
 Matriz operator*(double escalar, const Matriz &m){
     Matriz multiplo(m.filas, m.columnas);
     for(unsigned int i = 0; i < multiplo.filas; ++i){
@@ -237,7 +271,7 @@ Matriz operator*(double escalar, const Matriz &m){
 
     return multiplo;
 }
-//*FLUJO DE SALIDA*
+//*AMIGA FLUJO DE SALIDA*
 std::ostream & operator<<(std::ostream &out, const Matriz &m){
     out << '\n';
     for(unsigned int i = 0; i < m.filas; ++i){
@@ -251,7 +285,7 @@ std::ostream & operator<<(std::ostream &out, const Matriz &m){
 
     return out;
 }
-//*FLUJO DE ENTRADA*
+//*AMIGA FLUJO DE ENTRADA*
 std::istream & operator>>(std::istream &in, Matriz &m){
     for(unsigned int i = 0; i < m.filas; ++i){
         for(unsigned int j = 0; j < m.columnas; ++j){
