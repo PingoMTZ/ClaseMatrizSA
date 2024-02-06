@@ -13,7 +13,7 @@
 /** \class Vector
  *
  * Permite utilizar <b> matrices din&aacute;micas </b> y ofrece un conjunto de operaciones b&aacute;sicas: suma, resta, multiplicaci&oacute;n de una
- * matriz por un escalar, producto matricial, trasponer, invertir, calcular la adjunta y el determinante.
+ * matriz por un escalar, producto matricial, trasponer, invertir.
  *
  *
  */
@@ -25,7 +25,7 @@ class Matriz {
      * \param m La matriz a multiplicar.
      * \return La matriz resultante de la multiplicaci&oacute;n por escalar.
      *
-     * \exception const <b>char *<\b> El vector resultante no puede ser creado.
+     * \exception const <b>char *<\b> La matriz resultante no puede ser creada.
      *
      */
     friend Matriz operator*(double escalar, const Matriz &m);
