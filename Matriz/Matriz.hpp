@@ -10,7 +10,7 @@
 
 #include <iostream>
 
-/** \class Vector
+/** \class Matriz
  *
  * Permite utilizar <b> matrices din&aacute;micas </b> y ofrece un conjunto de operaciones b&aacute;sicas: suma, resta, multiplicaci&oacute;n de una
  * matriz por un escalar, producto matricial, trasponer, invertir.
