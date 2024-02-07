@@ -240,69 +240,6 @@ public:
     Matriz Invertir() const;
 
     /**
-     * \brief Calcula la matriz adjunta.
-     *
-     * Este m&eacute;todo calcula y devuelve la matriz adjunta de la instancia actual.
-     * Solo se aceptan matrices cuadradas con dimensiones mayores a 1x1 para obtener la matriz adjunta.
-     *
-     * \return Matriz adjunta de la instancia actual.
-     *
-     * \throws const char* Si la matriz no es cuadrada o sus dimensiones son 1x1.
-     *
-     * \code
-     * // Ejemplo de uso:
-     * Matriz A(3, 3);  // se inicializa una matriz cuadrada
-     * // se llena A con datos
-     * Matriz A_adjunta = A.Adjunta(); // se calcula la matriz adjunta de A
-     * \endcode
-     */
-
-    Matriz Adjunta() const;
-
-    /**
-     * \brief Calcula el determinante de la matriz.
-     *
-     * Este m&eacute;todo calcula y devuelve el determinante de la instancia actual.
-     * Solo se aceptan matrices cuadradas para obtener el determinante.
-     *
-     * \return Determinante de la instancia actual.
-     *
-     * \throws const char* Si la matriz no es cuadrada.
-     *
-     * \code
-     * // Ejemplo de uso:
-     * Matriz A(3, 3);  // se inicializa una matriz cuadrada
-     * // se llena A con datos
-     * double det_A = A.Determinante(); // se calcula el determinante de A
-     * \endcode
-     */
-
-    double Determinante() const;
-
-    /**
-     * \brief Obtiene una submatriz al ignorar una fila y una columna específicas.
-     *
-     * Este m&eacute;todo devuelve una nueva matriz que es una submatriz de la instancia actual al ignorar una fila y una columna espec&iacute;ficas.
-     * Solo se aceptan matrices cuadradas con dimensiones mayores a 1x1 para obtener una submatriz.
-     *
-     * \param ignoraFila &iacute;ndice de la fila que se ignorar&aacute;.
-     * \param ignoraColumna &iacute;ndice de la columna que se ignorar&aacute;.
-     *
-     * \return Submatriz de la instancia actual al ignorar la fila y columna especificadas.
-     *
-     * \throws const char* Si las dimensiones de la matriz no son aptas para obtener una submatriz.
-     *
-     * \code
-     * // Ejemplo de uso:
-     * Matriz A(3, 3);  // se inicializa una matriz cuadrada
-     * // se llena A con datos
-     * Matriz submatriz_A = A.SubMatriz(1, 2); // se obtiene una submatriz al ignorar la segunda fila y la tercera columna
-     * \endcode
-     */
-
-    Matriz SubMatriz(unsigned int ignoraFila, unsigned int ignoraColumna) const;
-
-    /**
      * \brief Redimensiona la matriz a las nuevas dimensiones especificadas.
      *
      * Este m&eacute;todo redimensiona la instancia actual a las nuevas dimensiones especificadas.
@@ -328,6 +265,13 @@ private:
     unsigned int columnas;
 
     double **arreglo;
+
+    Matriz Adjunta() const;
+
+    double Determinante() const;
+
+    Matriz SubMatriz(unsigned int ignoraFila, unsigned int ignoraColumna) const;
+
 };
 
 #endif // MATRIZ_HPP_INCLUDED

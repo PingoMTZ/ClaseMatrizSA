@@ -37,18 +37,6 @@ int main()
 
         std::cout << "Matriz redimensionada = " << resultante << '\n';
 
-        resultante = v.SubMatriz(0, 0);
-
-        std::cout << "Sub matriz (0,0) de v  = " << resultante << '\n';
-
-        std::cout << v << '\n';
-
-        std::cout << "Determinante de v = " << v.Determinante() << '\n';
-
-        std::cout << v << '\n';
-
-        std::cout << "Adjunta de v = " << v.Adjunta() << '\n';
-
         std::cout << v << '\n';
 
         std::cout << "Inversa de v = " << v.Invertir() << '\n';
